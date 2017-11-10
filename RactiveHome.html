@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ractive progress bar example</title>
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+ </head>
+ 
+<body>
+
+	<div id="mainBarContainer"></div>
+		<script id="template" type="text/ractive">
+		<div class="container">
+		  <h2>My Test </h2>   
+			<div>
+                  {{#each bars:i}}
+                 {{bars[@key]}}
+  	  
+			    <div class="progress">
+					<div id="bar1"  class="progress-bar progress-bar-striped {{ bars[@key] >100 ? "progress-bar-danger ": " " }} " role="progressbar" aria-valuenow="{{bars[@key]}}" aria-valuemin="0" aria-valuemax="100" style="width:{{bars[@key]}}%">
+					 <span> {{bars[@key]}}%</span>
+					</div>
+				  </div>
+			  
+			   {{/each}}
+			  
+            </div>
+			
+					<div class="row">
+						<div class="col-sm-12">
+							<Span class="bg-info">Please select the bar:</span>
+							<select id="barselector" onchange='ractive.set({activebar:this.value})'>
+								<option value="0">bar1</option>
+								<option value="1">bar2</option>
+								<option value="2">bar3</option>
+							</select>
+						</div>	
+						<div class="col-sm-12">
+							<Span class="bg-info">Click the buttons to change the bar:</span>
+							{{#each buttons:i}}
+								<button type="button" class="btn btn-default" on-click="updateProgress" data-index='{{buttons[@key]}}'>
+										{{buttons[@key]}} 
+									</button>
+								{{/each}}
+						</div>
+					</div>
+			
+		</div>
+		</script>
+</body>
+
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/ractive/1.0.0-build-96/ractive.min.js"></script>
+<script  src="js/myapp.js"></script>
+
+</html>
